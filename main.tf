@@ -56,7 +56,7 @@ resource "aws_launch_template" "asg-lt" {
     name = "phonebook-lt"
     image_id = data.aws_ami.amazon-linux-2.id
     instance_type = "t2.micro"
-    key_name = "your-keyname"
+    key_name = "******"  #write your keyname
     vpc_security_group_ids = [aws_security_group.server-sg.id]
     user_data = filebase64("user-data.sh")
     depends_on = [github_repository_file.dbendpoint]
@@ -101,9 +101,9 @@ resource "aws_alb_listener" "app-listener" {
 }
 
 resource "aws_autoscaling_group" "app-asg" {
-  max_size = 3
-  min_size = 1
-  desired_capacity = 2
+  max_size = 4
+  min_size = 2
+  desired_capacity = 3
   name = "phonebook-asg"
   health_check_grace_period = 300
   health_check_type = "ELB"
